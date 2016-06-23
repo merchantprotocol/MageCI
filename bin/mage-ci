@@ -77,7 +77,6 @@ Usage:
 ${MAGECIF[4]}$ mage-ci install <magento_directory> <version> <db_name> <OPTIONS> ${MAGECIF[0]}
     Installs a Magento version to a specified destination
       -c                  Create databases flag
-      -g                  Github Repository to be cloned
       -t                  Create test database flag (only in combination with -c option)
       -d  <download_dir>  Directory where all downloads are stored
       -n                  By specifying this flag you skip downloading process of magento code base, useful for composer based installments 
@@ -342,7 +341,7 @@ install_magento ()
    local base_url="http://magento.local/"; local download_dir=$MAGECI_TMP;
    local admin_password="123123test"; local clean_up=0; local no_download="0";
 
-   while getopts :u:g:r:p:f:b:d:a:cton opt
+   while getopts :u:r:p:f:b:d:a:cton opt
    do
      case $opt in
        u) db_user=$OPTARG        ;;
@@ -351,7 +350,6 @@ install_magento ()
        c) db_create="1"          ;;
        t) include_test_db="1"    ;;
        d) download_dir=$OPTARG   ;;
-       g) gitrepo=$OPTARG        ;;
        r) sql_base_url=$OPTARG   ;;
        b) base_url=$OPTARG       ;;
        a) admin_password=$OPTARG ;;
@@ -453,11 +451,11 @@ install_magento ()
 
    if [[ $no_download == "0" ]] 
    then
-       echo "${MAGECIF[2]}Cloning Repository From: git@github.com:$gitrepo.git${MAGECIF[0]}"
-       git clone git@github.com:$gitrepo.git $magento_dir
+       #echo "${MAGECIF[2]}Cloning Repository From: git@github.com:$gitrepo.git${MAGECIF[0]}"
+       #git clone git@github.com:$gitrepo.git $magento_dir
        #echo "${MAGECIF[2]}Downloading Magento from URL: https://github.com/$gitrepo/archive/master.zip${MAGECIF[0]}"
        #wget -q --no-clobber -P $download_dir https://github.com/$gitrepo/archive/master.zip
-       check_error_exit;
+       #check_error_exit;
        #echo "${MAGECIF[2]}Unpacking magento installment...${MAGECIF[0]}"
        #tar -zxf $download_dir/magento-$version.tar.gz -C $magento_dir --strip=1 magento
        # Special case for PHP5.4 with installation process
@@ -480,7 +478,7 @@ install_magento ()
           --skip_url_validation yes --encryption_key "key"
 
    check_error_exit
-   echo "${MAGECIF[1]}Installation sucesfully finished${MAGECIF[0]}"
+   echo "${MAGECIF[1]}Installation successfully finished${MAGECIF[0]}"
    if [ -n $include_test_db ] 
    then 
      read -d '' phpunit_local_xml <<LOCALXML
