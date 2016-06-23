@@ -77,6 +77,7 @@ Usage:
 ${MAGECIF[4]}$ mage-ci install <magento_directory> <version> <db_name> <OPTIONS> ${MAGECIF[0]}
     Installs a Magento version to a specified destination
       -c                  Create databases flag
+      -g                  Github Repository to be cloned
       -t                  Create test database flag (only in combination with -c option)
       -d  <download_dir>  Directory where all downloads are stored
       -n                  By specifying this flag you skip downloading process of magento code base, useful for composer based installments 
@@ -341,7 +342,7 @@ install_magento ()
    local base_url="http://magento.local/"; local download_dir=$MAGECI_TMP;
    local admin_password="123123test"; local clean_up=0; local no_download="0";
 
-   while getopts :u:r:p:f:b:d:a:cton opt
+   while getopts :u:g:r:p:f:b:d:a:cton opt
    do
      case $opt in
        u) db_user=$OPTARG        ;;
