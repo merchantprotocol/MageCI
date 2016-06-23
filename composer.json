@@ -1,9 +1,15 @@
 {
-    "name": "ecomdev/mage-ci",
+    "name": "merchantprotocol/mageci",
     "license": "OSL-3.0",
     "description": "Magento Continuous Integration Tools",
-    "homepage": "https://github.com/EcomDev/MageCI",
+    "homepage": "https://github.com/merchantprotocol/MageCI",
     "authors":[
+        {
+            "name": "Jonathon",
+            "email":"jonathon@merchantprotocol.com",
+            "homepage": "https://merchantprotocol.com",
+            "role":"Developer"
+        },
         {
             "name": "Ivan Chepurnyi",
             "email":"ivan.chepurnyi@ecomdev.org",
