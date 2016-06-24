@@ -14,7 +14,18 @@ In case you are not familiar with [Composer](http://getcomposer.org/), see [comp
 
 In the _require_ or alternatively in the _require-dev_ section, add the following dependency:
 
-    "ecomdev/mage-ci": "dev-master"
+    "merchantprotocol/mageci" : "dev-master",
+
+In the json root add the following:
+
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/merchantprotocol/MageCI"
+        }
+    ]
+
+You can see a completed file [here](https://github.com/merchantprotocol/M1-new-customer-configuration/edit/master/.travis/composer.json). 
 
 Usage
 -----
