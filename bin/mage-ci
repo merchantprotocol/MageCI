@@ -430,18 +430,15 @@ install_magento ()
            cp $sql_dump_file $download_dir/dump/$dest_file
 	   tar -zxvf $download_dir/dump/$dest_file -C $download_dir/dump/
            sql_dump_file="$download_dir/dump/${version}.sql"
-	   echo "Uncompressed file ${download_dir}/dump/${dest_file} expecting ${sql_dump_file}"
-	   echo "ls -la"
-	   ls -la $download_dir/dump/
         fi
         
         echo "${MAGECIF[2]}Loading db dump into ${db_name} database...${MAGECIF[0]}"
-        mysql -B $db_cred $db_name < $sql_dump_file
+        mysql -f -B $db_cred $db_name < $sql_dump_file
         check_error_exit
         if [[ $include_test_db == "1" ]]
           then
             echo "${MAGECIF[2]}Create ${db_name}_test database...${MAGECIF[0]}"
-            mysql -B $db_cred ${db_name}_test < $sql_dump_file
+            mysql -f -B $db_cred ${db_name}_test < $sql_dump_file
             check_error_exit
           fi
       fi
@@ -454,13 +451,6 @@ install_magento ()
 
    if [[ $no_download == "0" ]] 
    then
-       #echo "${MAGECIF[2]}Cloning Repository From: git@github.com:$gitrepo.git${MAGECIF[0]}"
-       #git clone git@github.com:$gitrepo.git $magento_dir
-       #echo "${MAGECIF[2]}Downloading Magento from URL: https://github.com/$gitrepo/archive/master.zip${MAGECIF[0]}"
-       #wget -q --no-clobber -P $download_dir https://github.com/$gitrepo/archive/master.zip
-       #check_error_exit;
-       #echo "${MAGECIF[2]}Unpacking magento installment...${MAGECIF[0]}"
-       #tar -zxf $download_dir/magento-$version.tar.gz -C $magento_dir --strip=1 magento
        # Special case for PHP5.4 with installation process
        echo "${MAGECIF[2]}Applying pdo_mysql check fix...${MAGECIF[0]}"
        config_file="${magento_dir}/app/code/core/Mage/Install/etc/config.xml"
