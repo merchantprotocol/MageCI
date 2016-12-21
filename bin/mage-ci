@@ -408,12 +408,12 @@ install_magento ()
 
       if [[ $sql_base_url =~ ^https?\:// ]]
       then
-        echo "${MAGECIF[2]}Trying download SQL dump from url: $sql_base_url/$version.sql.gz"
-        wget -q --no-clobber -P $download_dir $sql_base_url/$version.sql.gz
+        echo "${MAGECIF[2]}Trying download SQL dump from url: $sql_base_url/$version.sql.tar.gz"
+        wget -q --no-clobber -P $download_dir $sql_base_url/$version.sql.tar.gz
         if [ $? -eq 0 ]
         then
           echo "Dump is downloaded and will be used for installation${MAGECIF[0]}"
-          sql_dump_file="$download_dir/$version.sql.gz"
+          sql_dump_file="$download_dir/$version.sql.tar.gz"
         else
           echo "Dump is not available...${MAGECIF[0]}"
         fi
@@ -422,14 +422,15 @@ install_magento ()
 
       if [ -f "${sql_dump_file}" ]
       then 
-        if [[ $sql_dump_file =~ \.gz$ ]] 
+        if [[ $sql_dump_file =~ \.tar\.gz$ ]] 
 	    then
            echo "${MAGECIF[2]}Uncompressing dump file...${MAGECIF[0]}"
            mkdir -p $download_dir/dump
            local dest_file=$(basename $sql_dump_file)
            cp $sql_dump_file $download_dir/dump/$dest_file
-           gzip -f -d $download_dir/dump/$dest_file
-           sql_dump_file="$download_dir/dump/${dest_file/.gz/}"
+	   tar -zxf $download_dir/dump/$dest_file
+           #gzip -f -d $download_dir/dump/$dest_file
+           sql_dump_file="$download_dir/dump/${dest_file/.tar/.gz/}"
         fi
         
         echo "${MAGECIF[2]}Loading db dump into ${db_name} database...${MAGECIF[0]}"
