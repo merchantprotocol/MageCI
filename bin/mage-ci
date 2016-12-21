@@ -431,6 +431,8 @@ install_magento ()
 	   tar -zxf $download_dir/dump/$dest_file
            sql_dump_file="$download_dir/dump/${version}.sql"
 	   echo "Uncompressed file ${sql_dump_file}"
+	   echo "ls -la"
+	   ls -la $download_dir/dump/
         fi
         
         echo "${MAGECIF[2]}Loading db dump into ${db_name} database...${MAGECIF[0]}"
