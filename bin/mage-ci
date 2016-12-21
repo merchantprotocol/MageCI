@@ -429,7 +429,7 @@ install_magento ()
            local dest_file=$(basename $sql_dump_file)
            cp $sql_dump_file $download_dir/dump/$dest_file
 	   tar -zxf $download_dir/dump/$dest_file
-           sql_dump_file="$download_dir/dump/${dest_file/.tar/.gz/}"
+           sql_dump_file="$download_dir/dump/${version}.sql"
 	   echo "Uncompressed file ${sql_dump_file}"
         fi
         
