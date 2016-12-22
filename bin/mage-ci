@@ -481,7 +481,7 @@ install_magento ()
         <resources>
             <default_setup>
                 <connection>
-                    <dbname><![CDATA[${db_name}_test]]></dbname>
+                    <dbname><![CDATA[${db_name}]]></dbname>
                 </connection>
             </default_setup>
         </resources>
