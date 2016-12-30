@@ -453,11 +453,10 @@ install_magento ()
    then
        echo "${MAGECIF[2]}Downloading Magento from URL: https://github.com/merchantprotocol/M1-magento/archive/v$version.tar.gz${MAGECIF[0]}"
        wget -q --no-clobber -P $download_dir https://github.com/merchantprotocol/M1-magento/archive/v$version.tar.gz
-       echo "dump directory contents"
-       ls -la $download_dir
        check_error_exit;
        echo "${MAGECIF[2]}Unpacking magento installment...${MAGECIF[0]}"
        tar -zxf $download_dir/v$version.tar.gz -C $magento_dir
+       ls -la $magento_dir
        # Special case for PHP5.4 with installation process
        echo "${MAGECIF[2]}Applying pdo_mysql check fix...${MAGECIF[0]}"
        config_file="${magento_dir}/app/code/core/Mage/Install/etc/config.xml"
