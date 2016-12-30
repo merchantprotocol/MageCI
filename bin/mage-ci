@@ -339,7 +339,7 @@ install_magento ()
    local db_create; local db_user="root"; local db_pass=""; local sql_dump_file=""; local include_test_db
    local phpunit_local_xml; local opt; local sql_base_url; local db_cred
    local base_url="http://127.0.0.1/"; local download_dir=$MAGECI_TMP;
-   local admin_password="admin123"; local clean_up=0; local no_download="1";
+   local admin_password="admin123"; local clean_up=0; local no_download="0";
 
    while getopts :u:r:p:f:b:d:a:cton opt
    do
