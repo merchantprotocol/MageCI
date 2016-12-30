@@ -339,7 +339,7 @@ install_magento ()
    local db_create; local db_user="root"; local db_pass=""; local sql_dump_file=""; local include_test_db
    local phpunit_local_xml; local opt; local sql_base_url; local db_cred
    local base_url="http://127.0.0.1/"; local download_dir=$MAGECI_TMP;
-   local admin_password="admin123"; local clean_up=0; local no_download="0";
+   local admin_password="admin123"; local clean_up=0; local no_download="1";
 
    while getopts :u:r:p:f:b:d:a:cton opt
    do
@@ -451,6 +451,11 @@ install_magento ()
 
    if [[ $no_download == "0" ]] 
    then
+       echo "${MAGECIF[2]}Downloading Magento from URL: https://github.com/merchantprotocol/M1-magento/archive/v$version.tar.gz${MAGECIF[0]}"
+       wget -q --no-clobber -P $download_dir https://github.com/merchantprotocol/M1-magento/archive/v$version.tar.gz
+       check_error_exit;
+       echo "${MAGECIF[2]}Unpacking magento installment...${MAGECIF[0]}"
+       tar -zxf $download_dir/v$version.tar.gz -C $magento_dir
        # Special case for PHP5.4 with installation process
        echo "${MAGECIF[2]}Applying pdo_mysql check fix...${MAGECIF[0]}"
        config_file="${magento_dir}/app/code/core/Mage/Install/etc/config.xml"
@@ -666,11 +671,11 @@ check_error_exit () {
 
 case $action in
 install) install_magento "$@" ;;
+install-multiple) install_multiple_magento "$@" ;;
 install-module)  install_module "$@" ;;
 update-modules)  update_modules "$@" ;;
 uninstall-module)  uninstall_module "$@" ;;
 uninstall)  uninstall_magento "$@" ;;
-install-multiple) install_multiple_magento "$@" ;;
 db-dump) dump_magento "$@" ;;
 phpunit) run_phpunit "$@" ;;
 shell) run_shell "$@" ;;
