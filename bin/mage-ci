@@ -547,12 +547,14 @@ install_module () {
      if [[ $magento_module_source =~ ^git@ || $magento_module_source =~ \.git$ ]]
         then
         echo "${MAGECIF[2]}Installing module from git repository: $magento_module_source${MAGECIF[0]}"
-        printf 'y' | $modman clone $magento_module_source $modman_args
+        $modman clone $magento_module_source $modman_args
+	expect "%"
+	send "yes\r"
         check_error_exit
      elif [ -d "$magento_module_source" ]
      then
         echo "${MAGECIF[2]}Installing module from local directory: $magento_module_source${MAGECIF[0]}"
-        printf 'y' | $modman link $magento_module_source $modman_args
+        $modman link $magento_module_source $modman_args
         check_error_exit
      fi
    else
