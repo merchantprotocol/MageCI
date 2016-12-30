@@ -546,11 +546,15 @@ install_module () {
    then
      if [[ $magento_module_source =~ ^git@ || $magento_module_source =~ \.git$ ]]
         then
+	# Install the module from a git repository
         echo "${MAGECIF[2]}Installing module from git repository: $magento_module_source${MAGECIF[0]}"
+	set timeout 10
         $modman clone $magento_module_source $modman_args
-	set timeout 5
+	# Answer the command line
 	expect "Are you sure you want to continue connecting (yes/no)?"
 	send "yes\r"
+	expect eof
+	# Exit on error
         check_error_exit
      elif [ -d "$magento_module_source" ]
      then
