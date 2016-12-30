@@ -548,6 +548,7 @@ install_module () {
         then
         echo "${MAGECIF[2]}Installing module from git repository: $magento_module_source${MAGECIF[0]}"
         $modman clone $magento_module_source $modman_args
+	set timeout 5
 	expect "Are you sure you want to continue connecting (yes/no)?"
 	send "yes\r"
         check_error_exit
