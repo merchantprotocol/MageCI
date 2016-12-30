@@ -548,12 +548,16 @@ install_module () {
         then
 	# Install the module from a git repository
         echo "${MAGECIF[2]}Installing module from git repository: $magento_module_source${MAGECIF[0]}"
-	set timeout 10
+	set prompt "#|>|\\\$"
         $modman clone $magento_module_source $modman_args
 	# Answer the command line
-	expect "Are you sure you want to continue connecting (yes/no)?"
-	send "yes\r"
-	expect eof
+	expect {
+		#If 'expect' sees '(yes/no )', then it will send 'yes'
+		#and continue the 'expect' loop
+		"(yes/no)" { send "yes\r";exp_continue}
+	}
+	send "root\r"
+	expect -re $prompt
 	# Exit on error
         check_error_exit
      elif [ -d "$magento_module_source" ]
