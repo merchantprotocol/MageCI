@@ -548,8 +548,9 @@ install_module () {
         then
 	# Install the module from a git repository
         echo "${MAGECIF[2]}Installing module from git repository: $magento_module_source${MAGECIF[0]}"
-	scp -o StrictHostKeyChecking=no root@IP:/root/K 
-	$modman clone $magento_module_source $modman_args
+	$modman clone $magento_module_source $modman_args<< EOF
+y
+EOF
 	# Exit on error
         check_error_exit
      elif [ -d "$magento_module_source" ]
