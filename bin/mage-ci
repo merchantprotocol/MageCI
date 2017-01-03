@@ -551,7 +551,7 @@ install_module () {
 	#$modman clone $magento_module_source $modman_args
 	git clone $magento_module_source .modman/$magento_module
 	$modman repair --force
-	ls -la .modman/$magento_module
+	#ls -la .modman/$magento_module
 	# Exit on error
         check_error_exit
      elif [ -d "$magento_module_source" ]
