@@ -548,7 +548,9 @@ install_module () {
         then
 	# Install the module from a git repository
         echo "${MAGECIF[2]}Installing module from git repository: $magento_module_source${MAGECIF[0]}"
-	$modman clone $magento_module_source $modman_args
+	echo "into folder .modman/$magento_module"
+	#$modman clone $magento_module_source $modman_args
+	git clone $magento_module_source .modman/$magento_module
 	# Exit on error
         check_error_exit
      elif [ -d "$magento_module_source" ]
