@@ -550,7 +550,7 @@ install_module () {
         echo "${MAGECIF[2]}Installing module from git repository: $magento_module_source${MAGECIF[0]}"
 	#$modman clone $magento_module_source $modman_args
 	git clone $magento_module_source .modman/$magento_module
-	$modman repair --force
+	$modman repair --force --copy
 	#ls -la .modman/$magento_module
 	# Exit on error
         check_error_exit
