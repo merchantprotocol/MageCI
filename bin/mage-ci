@@ -474,7 +474,7 @@ install_magento ()
           --use_secure no --secure_base_url "$base_url" --use_secure_admin no \
           --admin_lastname Owner --admin_firstname Store --admin_email "admin@example.com" \
           --admin_username admin --admin_password "$admin_password" \
-          --skip_url_validation yes --encryption_key "key"
+          --skip_url_validation yes --encryption_key "b469be1cda2fc9ba7c6f73eff3527ec1"
 
    check_error_exit
    echo "${MAGECIF[1]}Installation successfully finished${MAGECIF[0]}"
